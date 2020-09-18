@@ -13,8 +13,6 @@ if(process.env.NODE !== 'production'){
   require('dotenv').config();
 }
 
-
-
 try {
   mongoose.connect(process.env.MONGO_DB_CONNECTION, {
     useNewUrlParser: true,
