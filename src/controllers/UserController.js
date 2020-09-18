@@ -5,13 +5,14 @@ module.exports = {
   async createUser(req, res){
     try {
       
-      const {nome, email, senha, telefones: {numero, ddd}} = req.body;
+      const {userId, nome, email, senha, telefones: {numero, ddd}, } = req.body;
 
       const existentUser = await User.findOne({email});
 
       if(!existentUser){
         const hashedPassword = await bcrypt.hash(senha, 10);
         const user = await User.create({
+          userId,
           nome,
           email,          
           senha: hashedPassword,
