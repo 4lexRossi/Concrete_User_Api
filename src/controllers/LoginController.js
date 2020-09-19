@@ -18,7 +18,7 @@ module.exports = {
       if(user && await bcrypt.compare(senha, user.senha)){
         const userResponse = {
           _id: user._id,
-          email: user.email
+          nome: user.nome
         }
         return res.json(userResponse)
       }else{

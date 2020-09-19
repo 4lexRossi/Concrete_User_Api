@@ -22,7 +22,11 @@ module.exports = {
           }
                   
         });
-        return res.json(user)
+        return res.json({
+          _id: user._id,
+          nome: user.nome
+
+        })
       }
       return res.status(400).json({
         mensagem: 'Email já existente'
