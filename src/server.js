@@ -1,13 +1,17 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const app = express();
 const routes = require('./routes');
+const http = require('http');
+const socketio = require('socket.io');
 
 const PORT = process.env.PORT || 8000;
 
-app.use(cors())
-app.use(express.json())
+const app = express();
+const server = http.Server(app);
+const io = socketio(server);
+
+
 
 if(process.env.NODE !== 'production'){
   require('dotenv').config();
@@ -22,9 +26,24 @@ try {
 } catch(error){
   console.log(error)
 }
+const connectUsers = {};
 
+io.on('connection', socket =>{
+  const { user } = socket.handshake.query;
+
+  connectUsers[user] = socket._id;
+})
+
+app.use((req, res, next) => {
+  req.io = io;
+  req.connectUsers = connectUsers;
+  return next()
+})
+
+app.use(cors())
+app.use(express.json())
 app.use(routes);
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`)
 })
