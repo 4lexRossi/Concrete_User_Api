@@ -24,7 +24,7 @@ module.exports = {
         });
         return  jwt.sign({ user: userResponse }, 'secret', (err, token) =>{
           return res.json({
-            user: token,
+            token: token,
             user_id: userResponse._id
 					})
 				})
@@ -55,36 +55,4 @@ module.exports = {
 			})
 		}	
   }
-  
-
-  /*async updateUser(req, res){
-    const { userId } = req.params;
-
-    if (!userId) {
-        return res.status(400).send({ mensagem: 'ID de usuário incorreta.' })
-    }
-
-    try {
-        const updatedUser = await User.findOneAndUpdate(
-          {
-            nome,
-            email,
-            telefones:{
-              numero,
-              ddd
-            }
-         });       
-
-        if (updatedUser) {
-            return res.status(200).send({ mensagem: 'Cadastro atualizado com sucesso!' })
-        }
-
-
-        res.status(400).send({ mensagem: 'Não foi possivel atualizar o cadastro' })
-
-        
-    } catch (error) {
-        res.send(error)
-    }
-  }*/
 }
