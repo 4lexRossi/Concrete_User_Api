@@ -24,7 +24,7 @@ module.exports = {
         return jwt.sign({ user: userResponse }, 'secret', (err, token) => {
           const loginDate = new Date().toLocaleString()
           return res.json({          
-            token:token,
+            user:token,
             user_id:userResponse._id,          
             ultimo_login: loginDate                 
           });
