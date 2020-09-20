@@ -19,14 +19,15 @@ module.exports = {
       if(user && await bcrypt.compare(senha, user.senha)){
         const userResponse = {
           _id: user._id,
-          nome: user.nome          
+          nome: user.nome,          
         }
-        return jwt.sign({ user: userResponse }, 'secret', (err, token) =>{
-          return res.json({
-          user:token,
-          user_id:userResponse._id,
-          date:Date.now()
-          })
+        return jwt.sign({ user: userResponse }, 'secret', (err, token) => {
+          const loginDate = new Date().toLocaleString()
+          return res.json({          
+            token:token,
+            user_id:userResponse._id,          
+            ultimo_login: loginDate                 
+          });
         })        
       }else{
         return res.status(401).json({mensagem:"Usuário e/ou senha inválidos"})

@@ -9,10 +9,11 @@ routes.get('/status', (req, res) => {
 })
 
 //register
+routes.get('/user/:userId', verifyToken, UserController.getUserById)
 routes.post('/user/register', UserController.createUser)
-routes.get('/user/:userId', UserController.getUserById)
+
 
 //login
-routes.post('/login', verifyToken, LoginController.store)
+routes.post('/login', LoginController.store)
 
 module.exports = routes;

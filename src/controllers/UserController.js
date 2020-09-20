@@ -3,9 +3,9 @@ const bcrypt = require('bcrypt');
 
 module.exports = {
   async createUser(req, res){
-    try {
+    try {     
       
-      const {userId, nome, email, senha, telefones: {numero, ddd}, } = req.body;
+      const {userId, nome, email, senha, telefones: {numero, ddd} } = req.body;     
 
       const existentUser = await User.findOne({email});
 
@@ -19,14 +19,9 @@ module.exports = {
           telefones: {
             numero,
             ddd
-          }
-                  
+          }                         
         });
-        return res.json({
-          _id: user._id,
-          nome: user.nome
-
-        })
+        return res.json(user)
       }
       return res.status(400).json({
         mensagem: 'Email já existente'

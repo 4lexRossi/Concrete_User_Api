@@ -7,7 +7,10 @@ const UserSchema = new mongoose.Schema({
   telefones: {
     numero: Number,
     ddd: Number
-  }  
+  },
+},
+{
+  timestamps: { createdAt: true, updatedAt: true }
 })
 
 module.exports = mongoose.model('Users', UserSchema)
