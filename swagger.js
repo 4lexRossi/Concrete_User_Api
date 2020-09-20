@@ -8,7 +8,7 @@ const doc = {
   },
   host: "https://create-user-concrete.herokuapp.com",
   basePath: "/",
-  schemes: ['http', 'https'],
+  schemes: ['https'],
   consumes: ['application/json'],
   produces: ['application/json'],
   tags: [

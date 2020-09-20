@@ -13,8 +13,7 @@
       "description": "Endpoints"
     }
   ],
-  "schemes": [
-    "http",
+  "schemes": [   
     "https"
   ],
   "securityDefinitions": {},
